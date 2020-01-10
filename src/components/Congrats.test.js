@@ -6,11 +6,13 @@ import Congrats from "./Congrats";
 import { findByTestAttr } from "../test/testUtils";
 Enzyme.configure({ adpater: new EnzymeAdapter() });
 
-const setup = (props = {}) => {
-  return shallow(<Congrats {...props} />);
-};
+const setup = (props = {}) => shallow(<Congrats {...props} />);
 
-test("renders without crashing", () => {});
+test("renders without crashing", () => {
+  const wrapper = setup();
+  const component = findByTestAttr(wrapper, "component-congrats");
+  expect(component.length).toBe(1);
+});
 
 test("renders no text when 'success' prop is false", () => {});
 
