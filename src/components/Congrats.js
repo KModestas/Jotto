@@ -1,3 +1,5 @@
 import React from "react";
 
-export default () => <h1 data-test="component-congrats">CONGRATS</h1>;
+const Congrats = () => <h1 data-test="component-congrats">CONGRATS</h1>;
+
+export default Congrats;

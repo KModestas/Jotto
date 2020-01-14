@@ -4,6 +4,7 @@ import EnzymeAdapter from "enzyme-adapter-react-16";
 import Congrats from "./Congrats";
 
 import { findByTestAttr } from "../test/testUtils";
+
 Enzyme.configure({ adpater: new EnzymeAdapter() });
 
 const setup = (props = {}) => shallow(<Congrats {...props} />);
