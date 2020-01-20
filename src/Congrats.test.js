@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme from "enzyme";
+import { shallow } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
@@ -9,7 +9,7 @@ const defaultProps = { success: false };
 
 const setup = (props = {}) => {
   const setupProps = { ...defaultProps, ...props };
-  return Enzyme.shallow(<Congrats {...setupProps} />);
+  return shallow(<Congrats {...setupProps} />);
 };
 
 test("renders without crashing", () => {
