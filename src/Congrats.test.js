@@ -4,17 +4,22 @@ import Enzyme from "enzyme";
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
 
-const setup = (props = {}) => Enzyme.shallow(<Congrats {...props} />);
+// declare default props to be passed into components when testing. Make sure these prop mimick actual props in your application, otherwise tests may pass when they actually shouldn't
+const defaultProps = { success: false };
+
+const setup = (props = {}) => {
+  const setupProps = { ...defaultProps, ...props };
+  return Enzyme.shallow(<Congrats {...setupProps} />);
+};
 
 test("renders without crashing", () => {
-  // even though the success prop is ireelevant to this test, it needs to be passed in because success is a required propType in the Congrats component
-  const wrapper = setup({ success: false });
+  const wrapper = setup();
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });
 
 test("renders no text when 'success' prop is false", () => {
-  const wrapper = setup({ success: false });
+  const wrapper = setup();
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.text()).toBe("");
 });
