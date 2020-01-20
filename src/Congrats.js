@@ -9,5 +9,3 @@ export default props => (
     )}
   </div>
 );
-
-// <div data-test="component-congrats">CONGRATS</div>;
