@@ -1,4 +1,5 @@
 import checkPropTypes from "check-prop-types";
+// checkPropTypes returns  errors from propTypes rather than just console logging them
 
 export const findByTestAttr = (wrapper, val) =>
   wrapper.find(`[data-test="${val}"]`);

@@ -7,7 +7,8 @@ import Congrats from "./Congrats";
 const setup = (props = {}) => Enzyme.shallow(<Congrats {...props} />);
 
 test("renders without crashing", () => {
-  const wrapper = setup();
+  // even though the success prop is ireelevant to this test, it needs to be passed in because success is a required propType in the Congrats component
+  const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });
