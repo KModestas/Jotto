@@ -1,3 +1,13 @@
 import React from "react";
 
-export default () => <h1 data-test="component-congrats">CONGRATS</h1>;
+export default props => (
+  <div data-test="component-congrats">
+    {props.success ? (
+      <span data-test="congrats-message">
+        Congratulations, you guessed the word!
+      </span>
+    ) : (
+      ""
+    )}
+  </div>
+);
