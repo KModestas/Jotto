@@ -1,2 +1,2 @@
-export const findTestByAttr = (wrapper, val) =>
+export const findByTestAttr = (wrapper, val) =>
   wrapper.find(`[data-test="${val}"]`);
