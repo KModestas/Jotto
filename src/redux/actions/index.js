@@ -1,9 +1,9 @@
-export const types = {
+export const actionTypes = {
   CORRECT_GUESS: "CORRECT_GUESS"
 };
 
 export const correctGuess = () => {
   return {
-    type: types.CORRECT_GUESS
+    type: actionTypes.CORRECT_GUESS
   };
 };
