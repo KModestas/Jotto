@@ -1,13 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const GuessedWords = props => (
-  <div data-test="component-guessed-words">
-    <span data-test="guess-instructions">
-      {props.guessedWords.length === 0 && "Try to guess the word!"}
-    </span>
-  </div>
-);
+const GuessedWords = props => {
+  let contents;
+  if (props.guessedWords.length === 0) {
+    contents = (
+      <span data-test="guess-instructions">Try to guess the secret word!</span>
+    );
+  } else {
+    const guessedWordsRows = props.guessedWords.map((word, i) => (
+      <tr data-test="guessed-word" key={i}>
+        <td>{word.guessedWord}</td>
+        <td>{word.letterMatchCount}</td>
+      </tr>
+    ));
+    contents = (
+      <div data-test="guessed-words">
+        <h3>Guessed Words</h3>
+        <table>
+          <th>
+            <tr>
+              <th>Guess</th>
+              <th>Matching Letters</th>
+            </tr>
+          </th>
+          <tbody>{guessedWordsRows}</tbody>
+        </table>
+      </div>
+    );
+  }
+  return <div data-test="component-guessed-words">{contents}</div>;
+};
 
 // .shape is used to describe an object whose keys may be of different types
 // .objectOf is used for objects that have keys of the the same type
