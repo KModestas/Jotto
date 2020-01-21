@@ -13,3 +13,5 @@ test("returns state of true upon recieving an action of type 'CORRECT_GUESS", ()
   });
   expect(newState).toBe(true);
 });
+
+// some recommening skipping unit tests for actions and reducer and just doing intergration tests on the API
