@@ -2,8 +2,8 @@ import checkPropTypes from "check-prop-types";
 // checkPropTypes returns  errors from propTypes rather than just console logging them
 import { createStore, applyMiddleware } from "redux";
 
-import rootReducer from "../src/redux/reducers";
-import { middleware } from "../src/redux/store";
+import rootReducer from "../redux/reducers";
+import { middleware } from "../redux/store";
 
 // creates a testing store using actual reducers in the app
 export const storeFactory = initialState => {

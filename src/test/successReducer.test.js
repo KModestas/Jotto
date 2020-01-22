@@ -1,5 +1,5 @@
-import { actionTypes } from "../actions/";
-import successReducer from "./successReducer";
+import { actionTypes } from "../redux/actions";
+import successReducer from "../redux/reducers/successReducer";
 
 test("returns default initial state of 'false' when no action is passed", () => {
   // pass in the initial state of the reducer and an action object

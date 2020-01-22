@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import { findByTestAttr, storeFactory } from "./testUtils";
-import Input from "../src/components/Input";
+import Input from "../components/Input";
 
 // .dive() goes deeper into the child components of shallow created virtual DOM
 // you can chain these to go one layer deeper
