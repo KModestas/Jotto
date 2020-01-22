@@ -24,6 +24,7 @@ describe("guessWord action dispatcher", () => {
         success: false,
         guessedWords: [{ guessedWord: wrongGuess, letterMatchCount: 3 }]
       };
+
       // check if updated state is what you expected (toEqual as objects are mutable)
       expect(newState).toEqual(expectedState);
     });
@@ -58,7 +59,7 @@ describe("guessWord action dispatcher", () => {
           { guessedWord: wrongGuess, letterMatchCount: 3 }
         ]
       };
-      expected(newState).toEqual(expectedState);
+      expect(newState).toEqual(expectedState);
     });
     test("updates state correctly for right guess  ", () => {
       store.dispatch(guessWord(secretWord));
