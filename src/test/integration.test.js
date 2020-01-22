@@ -3,7 +3,7 @@ import { guessWord } from "../redux/actions";
 
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
-  const unsuccesfulGuess = "train";
+  const wrongGuess = "train";
   describe("no guessed words", () => {
     let store;
     // could you import the actual initialState from your app and use that instead as a more authentic example?
@@ -14,29 +14,64 @@ describe("guessWord action dispatcher", () => {
     });
     test("updates state correctly for wrong guess ", () => {
       // dispatch action to update state
-      store.dispatch(guessWord(unsuccesfulGuess));
+      store.dispatch(guessWord(wrongGuess));
       // get the updated state
       const newState = store.getState();
       // define what you expect the state to be
       const expectedState = {
+        // try changing order of properties to see if it fails
         ...initialState,
         success: false,
-        guessedWords: [
-          {
-            guessedWord: unsuccesfulGuess,
-            letterMatchCount: 3
-          }
-        ]
+        guessedWords: [{ guessedWord: wrongGuess, letterMatchCount: 3 }]
       };
       // check if updated state is what you expected (toEqual as objects are mutable)
       expect(newState).toEqual(expectedState);
     });
 
-    test("updates state correctly for right guess ", () => {});
+    test("updates state correctly for right guess ", () => {
+      store.dispatch(guessWord(secretWord));
+      const newState = store.getState();
+      const expectedState = {
+        secretWord,
+        success: true,
+        guessedWords: [{ guessedWord: secretWord, letterMatchCount: 5 }]
+      };
+      expect(newState).toEqual(expectedState);
+    });
   });
 
   describe("some guessed words", () => {
-    test("updates state correctly for wrong guess ", () => {});
-    test("updates state correctly for right guess  ", () => {});
+    const guessedWords = [{ guessedWord: "agile", letterMatchCount: 1 }];
+    const initialState = { guessedWords, secretWord };
+    let store;
+    beforeEach(() => {
+      store = storeFactory(initialState);
+    });
+    test("updates state correctly for wrong guess ", () => {
+      store.dispatch(guessWord(wrongGuess));
+      const newState = store.getState();
+      const expectedState = {
+        secretWord,
+        success: false,
+        guessedWords: [
+          ...guessedWords,
+          { guessedWord: wrongGuess, letterMatchCount: 3 }
+        ]
+      };
+      expected(newState).toEqual(expectedState);
+    });
+    test("updates state correctly for right guess  ", () => {
+      store.dispatch(guessWord(secretWord));
+      const newState = store.getState();
+      const expectedState = {
+        secretWord,
+        success: true,
+        guessedWords: [
+          ...guessedWords,
+          { guessedWord: secretWord, letterMatchCount: 5 }
+        ]
+      };
+      expect(newState).toEqual(expectedState);
+    });
   });
 });
