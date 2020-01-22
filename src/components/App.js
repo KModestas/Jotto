@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import Congrats from "./congrats/Congrats";
-import GuessedWords from "./guessedWords/GuessedWords";
+import Congrats from "./Congrats";
+import GuessedWords from "./GuessedWords";
 
 const App = () => (
   <div className="container">
