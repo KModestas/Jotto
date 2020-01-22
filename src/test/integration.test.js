@@ -1,5 +1,8 @@
+import moxios from "moxios";
 import { storeFactory } from "./testUtils";
-import { guessWord } from "../redux/actions";
+import { guessWord, getSecretWord } from "../redux/actions";
+
+// these integration tests are testing the action creators AND reducers
 
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
@@ -73,6 +76,38 @@ describe("guessWord action dispatcher", () => {
         ]
       };
       expect(newState).toEqual(expectedState);
+    });
+  });
+});
+
+describe("getSecretWord action creator", () => {
+  beforeEach(() => {
+    // tells axios to use moxios instead of Http
+    moxios.install();
+  });
+  afterEach(() => {
+    // revert axios back to normal
+    moxios.uninstall();
+  });
+  test("adds response word to state", () => {
+    const secretWord = "party";
+    const store = storeFactory();
+
+    // tells moxios how to respons when axios sends it a request
+    // if you had an axios instance, it would be passed as an arg to wait()
+    moxios.wait(() => {
+      // get the most recent request (request to random word server)
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: secretWord
+      });
+    });
+
+    // a promise is being returned from getSecreWord() which can be chained with then()
+    return store.dispatch(getSecretWord()).then(() => {
+      const newState = store.getState();
+      expect(newState.secretWord).toBe(secretWord);
     });
   });
 });

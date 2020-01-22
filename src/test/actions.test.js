@@ -1,5 +1,6 @@
 import { correctGuess, actionTypes } from "../redux/actions";
 
+// this test is deprecated but is here as an example of how to unit test an individual action
 describe("correctGuess", () => {
   test('should return action with type "CORRECT_GUESS"', () => {
     const action = correctGuess();
