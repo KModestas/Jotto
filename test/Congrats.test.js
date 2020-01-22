@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { findByTestAttr, checkProps } from "../../../test/testUtils";
-import Congrats from "./Congrats";
+import { findByTestAttr, checkProps } from "./testUtils";
+import Congrats from "../src/components/congrats/Congrats";
 
 // declare default props to be passed into components when testing. Make sure these prop mimick actual props in your application, otherwise tests may pass when they actually shouldn't
 const defaultProps = { success: false };

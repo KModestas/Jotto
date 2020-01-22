@@ -1,4 +1,4 @@
-import { correctGuess, actionTypes } from "./";
+import { correctGuess, actionTypes } from "../src/redux/actions";
 
 describe("correctGuess", () => {
   test('should return action with type "CORRECT_GUESS"', () => {
