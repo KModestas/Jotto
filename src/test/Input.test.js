@@ -12,6 +12,7 @@ import Input from "../components/Input";
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
   // add test store as a prop to test component (mimicks provider in index.js which makes store avaliable to all connected components)
+  // depedning on if success prop is false or true, different components are rendered. This is what you are testing, not the props itself
   const wrapper = shallow(<Input store={store} />)
     .dive()
     .dive();
@@ -28,7 +29,6 @@ describe("render ", () => {
     });
     test("renders component without error", () => {
       const component = findByTestAttr(wrapper, "component-input");
-
       expect(component.length).toBe(1);
     });
     test("renders input box", () => {
@@ -66,13 +66,9 @@ describe("redux props", () => {
     // arbitrary value, can be false
     const success = true;
 
+    // in this test we dont use setUp because we only need to dive() once to see the Input props
     const store = storeFactory({ success });
-    // add test store as a prop to test component (mimicks provider in index.js which makes store avaliable to all connected components)
     const wrapper = shallow(<Input store={store} />).dive();
-
-    // const wrapper = setup({ success });
-
-    // console.log("HELLO ", wrapper.debug());
 
     // wrapper.instance() === null for functional components because they don't have instances.
     const successProp = wrapper.props().success;
