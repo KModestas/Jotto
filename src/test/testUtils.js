@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from "redux";
 
 import rootReducer from "../redux/reducers";
 import { middleware } from "../redux/store";
+import { connect } from "react-redux";
 
 // creates a testing store using actual reducers in the app
 export const storeFactory = initialState => {

@@ -82,7 +82,7 @@ describe("guessWord action dispatcher", () => {
 
 describe("getSecretWord action creator", () => {
   beforeEach(() => {
-    // tells axios to use moxios instead of Http
+    // tells axios to use moxios instead of Http (by configuring its adapter)
     moxios.install();
   });
   afterEach(() => {
@@ -105,6 +105,7 @@ describe("getSecretWord action creator", () => {
     });
 
     // a promise is being returned from getSecreWord() which can be chained with then()
+    // IMPORTANT - make sure to return this so that test doesnt complete first before promise is resolved
     return store.dispatch(getSecretWord()).then(() => {
       const newState = store.getState();
       expect(newState.secretWord).toBe(secretWord);
