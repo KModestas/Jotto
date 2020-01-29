@@ -6,7 +6,7 @@ import GuessedWords from "./GuessedWords";
 const App = () => (
   <div className="container">
     <h1>Jotto</h1>
-    <Congrats success={true} />
+    <Congrats />
     <GuessedWords
       guessedWords={[{ guessedWord: "YOOOO", letterMatchCount: 3 }]}
     />

@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 import { findByTestAttr, storeFactory } from "./testUtils";
 import Input from "../components/Input";
 
-// use wrapper.debug() instead of console.log()
+// use console.log(wrapper.debug()) instead of console.log(wrapper)
 
 // .dive() goes deeper into the child components of shallow created virtual DOM
 // you can chain these to go one layer deeper
@@ -65,7 +65,14 @@ describe("redux props", () => {
   test("has 'success' peice of state as prop", () => {
     // arbitrary value, can be false
     const success = true;
-    const wrapper = setup({ success });
+
+    const store = storeFactory({ success });
+    // add test store as a prop to test component (mimicks provider in index.js which makes store avaliable to all connected components)
+    const wrapper = shallow(<Input store={store} />).dive();
+
+    // const wrapper = setup({ success });
+
+    // console.log("HELLO ", wrapper.debug());
 
     // wrapper.instance() === null for functional components because they don't have instances.
     const successProp = wrapper.props().success;
