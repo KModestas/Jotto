@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ReactWrapper } from "enzyme";
 
 import { findByTestAttr, storeFactory } from "./testUtils";
 import Input, { UnconnectedInput } from "../components/Input";
@@ -71,8 +71,9 @@ describe("redux props", () => {
     const store = storeFactory({ success });
     const wrapper = shallow(<Input store={store} />).dive();
 
-    // wrapper.instance() === null for functional components because they don't have instances.
+    // props() seems to work on both classical and functional components
     const successProp = wrapper.props().success;
+
     expect(successProp).toBe(success);
   });
 
@@ -85,18 +86,29 @@ describe("redux props", () => {
 });
 
 describe("guessWord action creator call", () => {
-  test("guessWord runs when submit button is clicked ", () => {
-    const guessWordMock = jest.fn();
-    const props = {
-      guessWord: guessWordMock
-    };
-    const submitButton = findByTestAttr(
-      shallow(<UnconnectedInput {...props} />),
-      "submit-button"
-    );
-    submitButton.simulate("click");
+  let guessWordMock;
+  let wrapper;
+  const guessedWord = "train";
+
+  beforeEach(() => {
+    guessWordMock = jest.fn();
+    wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
+
+    // add value to input box by setting state
+    wrapper.setState({ currentGuess: guessedWord });
+
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    submitButton.simulate("click", { preventDefault() {} });
+  });
+
+  test("runs when submit button is clicked ", () => {
     const guessWordMockCallCount = guessWordMock.mock.calls.length;
     expect(guessWordMockCallCount).toBe(1);
   });
-  test("returns correct guessWord argument ", () => {});
+  test("contains input value as argument ", () => {
+    // mocks is an array of arrays. Each mock is an array storing arguments
+    // get the first argument of the first mock call
+    const guessedWordArg = guessWordMock.mock.calls[0][0];
+    expect(guessedWordArg).toBe(guessedWord);
+  });
 });
