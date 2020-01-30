@@ -3,4 +3,8 @@
 // it seems that setupTests needs to be in the root of your src, and tests need to be within src for them to work
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-configure({ adapter: new Adapter() });
+configure({
+  adapter: new Adapter(),
+  // only want life cycle methods to run when we explicitly call them (otherwise every test will call them unnecessarily)
+  disableLifecycleMethods: true
+});
