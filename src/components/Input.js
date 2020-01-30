@@ -6,7 +6,7 @@ export class UnconnectedInput extends Component {
   constructor() {
     super();
     this.state = {
-      currentGuess: null
+      currentGuess: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
