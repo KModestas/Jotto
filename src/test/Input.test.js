@@ -28,14 +28,17 @@ describe("render ", () => {
       const initialState = { success: false };
       wrapper = setup(initialState);
     });
+
     test("renders component without error", () => {
       const component = findByTestAttr(wrapper, "component-input");
       expect(component.length).toBe(1);
     });
+
     test("renders input box", () => {
       const inputBox = findByTestAttr(wrapper, "input-box");
       expect(inputBox.length).toBe(1);
     });
+
     test("renders submit button", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
       expect(submitButton.length).toBe(1);
@@ -43,18 +46,22 @@ describe("render ", () => {
   });
   describe("word has been guessed", () => {
     let wrapper;
+
     beforeEach(() => {
       const initialState = { success: true };
       wrapper = setup(initialState);
     });
+
     test("renders component without error", () => {
       const component = findByTestAttr(wrapper, "component-input");
       expect(component.length).toBe(1);
     });
+
     test("does not render input box", () => {
       const inputBox = findByTestAttr(wrapper, "input-box");
       expect(inputBox.length).toBe(0);
     });
+
     test("does not render submit button", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
       expect(submitButton.length).toBe(0);
@@ -105,10 +112,16 @@ describe("guessWord action creator call", () => {
     const guessWordMockCallCount = guessWordMock.mock.calls.length;
     expect(guessWordMockCallCount).toBe(1);
   });
+
   test("contains input value as argument ", () => {
     // mocks is an array of arrays. Each mock is an array storing arguments
     // get the first argument of the first mock call
     const guessedWordArg = guessWordMock.mock.calls[0][0];
     expect(guessedWordArg).toBe(guessedWord);
+  });
+
+  test("input box clears on submit", () => {
+    // wrapper.state find the value of any key passed in
+    expect(wrapper.state("currentGuess")).toBe("");
   });
 });

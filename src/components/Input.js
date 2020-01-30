@@ -14,7 +14,10 @@ export class UnconnectedInput extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const currentGuess = this.state.currentGuess;
-    if (currentGuess) this.props.guessWord(currentGuess);
+    if (currentGuess) {
+      this.props.guessWord(currentGuess);
+      this.setState({ currentGuess: "" });
+    }
   }
 
   render() {
