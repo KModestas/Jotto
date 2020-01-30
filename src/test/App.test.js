@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { storeFactory } from "./testUtils";
-import App from "../components/App";
+import App, { UnconnectedApp } from "../components/App";
 
 const setup = (state = {}) => {
   const store = storeFactory(state);
@@ -35,4 +35,23 @@ describe("redux properties", () => {
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeInstanceOf(Function);
   });
+});
+
+test("getSecretWord func runs on App mount ", () => {
+  // set up a mock function
+  const getSecretWordMock = jest.fn();
+  // prevent propType errors
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false,
+    guessedWords: []
+  };
+
+  // pass mock function to unconnected version of App component (we dont want redux connect, we want to explitly pass the mock function)
+  const wrapper = shallow(<UnconnectedApp {...props} />);
+  // explicitly call componentDidMount
+  wrapper.instance().componentDidMount();
+  // calls is an array so length tells you how many calls were made
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
 });

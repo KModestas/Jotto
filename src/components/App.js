@@ -6,9 +6,11 @@ import GuessedWords from "./GuessedWords";
 import Input from "./Input";
 import { getSecretWord } from "../redux/actions";
 
-// export unconnected class to be used in tests
-export class App extends Component {
-  componentDidMount() {}
+// export unconnected version to be used in tests (the name matters when destructuring which is why we call it UnconnectedApp, we could call it App theoretically but then we cant call the default version 'App')
+export class UnconnectedApp extends Component {
+  componentDidMount() {
+    this.props.getSecretWord();
+  }
 
   render() {
     return (
@@ -26,5 +28,5 @@ const mapStateToProps = ({ success, guessedWords, secretWord }) => {
   return { success, guessedWords, secretWord };
 };
 
-// also export connected version
-export default connect(mapStateToProps, { getSecretWord })(App);
+// also export connected version (to be imported as default so we can call it App instead of UnconnectedApp in the imported file)
+export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
