@@ -10,9 +10,7 @@ const Congrats = props => {
         </span>
       </div>
     );
-  } else {
-    return <div data-test="component-congrats" />;
-  }
+  } else <div data-test="component-congrats" />;
 };
 
 Congrats.propTypes = {

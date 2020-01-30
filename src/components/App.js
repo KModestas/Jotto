@@ -13,7 +13,7 @@ export class UnconnectedApp extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className='container'>
         <h1>Jotto</h1>
         <b>Secret Word: {this.props.secretWord}</b>
         <Congrats success={this.props.success} />
