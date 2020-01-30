@@ -1,4 +1,6 @@
 export const getLetterMatchCount = (guessedWord, secretWord) => {
+  // if server isnt running, secretWord will be null causing an error
+  secretWord = secretWord ? secretWord : "";
   const secretLetterSet = new Set(secretWord.split(""));
   // => { 'p', 'a', 'r', 't', 'y' }
   const guessedLetterSet = new Set(guessedWord.split(""));

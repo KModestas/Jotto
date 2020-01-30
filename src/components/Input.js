@@ -25,7 +25,7 @@ export class UnconnectedInput extends Component {
       <form className="form-inline">
         <input
           data-test="input-box"
-          className="mb-2 mx-sm-3"
+          className="mb-2 mx-sm-1"
           type="text"
           value={this.state.currentGuess}
           onChange={e => this.setState({ currentGuess: e.target.value })}
