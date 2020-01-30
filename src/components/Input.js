@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { guessWord } from "../redux/actions";
 
-const Input = props => {
+export const UnconnectedInput = props => {
   const contents = props.success ? null : (
     <form className="form-inline">
       <input
@@ -15,6 +15,7 @@ const Input = props => {
         data-test="submit-button"
         className="btn btn-primary mb-2"
         type="submit"
+        onClick={() => props.guessWord("train")}
       >
         SUBMIT
       </button>
@@ -28,4 +29,4 @@ const mapStateToProps = ({ success }) => {
 };
 
 // passing an object as second argument instead of mapDispatchToProps func because all we need to do is pass guessWord - we dont need to the full utility
-export default connect(mapStateToProps, { guessWord })(Input);
+export default connect(mapStateToProps, { guessWord })(UnconnectedInput);
