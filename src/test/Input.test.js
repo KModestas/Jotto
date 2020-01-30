@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 
 import { findByTestAttr, storeFactory } from "./testUtils";
 import Input from "../components/Input";
+import { guessWord } from "../redux/actions";
 
 // use console.log(wrapper.debug()) instead of console.log(wrapper)
 
@@ -12,7 +13,7 @@ import Input from "../components/Input";
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
   // add test store as a prop to test component (mimicks provider in index.js which makes store avaliable to all connected components)
-  // depedning on if success prop is false or true, different components are rendered. This is what you are testing, not the props itself
+  // depending on if success prop is false or true, different components are rendered. This is what you are testing, not the props itself
   const wrapper = shallow(<Input store={store} />)
     .dive()
     .dive();
@@ -73,5 +74,12 @@ describe("redux props", () => {
     // wrapper.instance() === null for functional components because they don't have instances.
     const successProp = wrapper.props().success;
     expect(successProp).toBe(success);
+  });
+
+  test("guessWord action creator is a function prop ", () => {
+    const store = storeFactory();
+    const wrapper = shallow(<Input store={store} />).dive();
+    const guessWordProp = wrapper.props().guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
   });
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { guessWord } from "../redux/actions";
 
 const Input = props => {
   const contents = props.success ? null : (
@@ -26,4 +27,5 @@ const mapStateToProps = ({ success }) => {
   return { success };
 };
 
-export default connect(mapStateToProps)(Input);
+// passing an object as second argument instead of mapDispatchToProps func because all we need to do is pass guessWord - we dont need to the full utility
+export default connect(mapStateToProps, { guessWord })(Input);
