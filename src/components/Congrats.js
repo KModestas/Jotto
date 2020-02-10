@@ -11,6 +11,8 @@ const Congrats = props => {
 	} else return <div data-test='component-congrats' />
 }
 
+//
+
 Congrats.propTypes = {
 	success: PropTypes.bool.isRequired
 }
